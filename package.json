@@ -1,0 +1,22 @@
+{
+  "name": "entdev",
+  "version": "1.0.0",
+  "description": "EntDev stock system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisbug/EntDev.git"
+  },
+  "author": "Chris Buggy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisbug/EntDev/issues"
+  },
+  "homepage": "https://github.com/chrisbug/EntDev#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
