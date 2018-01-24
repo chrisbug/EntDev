@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ScraperService } from '../services/scraper.service';
+import { ISE } from '../models/ise.model';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  iseResult: ISE[] = [];
+
+  constructor(private scraper:ScraperService) { }
 
   ngOnInit() {
+    this.scraper.listise().subscribe(result =>{
+      //for(let entry of result.data){
+      //  this.iseResult.push(entry)
+      //}
+      this.iseResult = result.data;
+      console.log(this.iseResult)
+    });
   }
 
 }
