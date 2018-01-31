@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ScraperService } from '../services/scraper.service';
-import { ISE } from '../models/ise.model';
+import { StockObject } from '../models/stockobject.model';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +9,20 @@ import { ISE } from '../models/ise.model';
 })
 export class HomeComponent implements OnInit {
 
-  iseResult: ISE[] = [];
+  iseResult: StockObject;
+  ftseResult: StockObject;
+  coinResult: StockObject;
 
   constructor(private scraper:ScraperService) { }
 
   ngOnInit() {
-    this.scraper.listise().subscribe(result =>{
-      //for(let entry of result.data){
-      //  this.iseResult.push(entry)
-      //}
-      this.iseResult = result.data;
-      console.log(this.iseResult)
+    this.scraper.listall().subscribe(result =>{
+      this.iseResult = result.ise;
+      this.ftseResult = result.ftse350;
+      this.coinResult = result.coinranking
+     console.log(this.iseResult);
+     console.log(this.ftseResult);
+     console.log(this.coinResult);
     });
   }
 
