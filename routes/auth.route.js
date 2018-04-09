@@ -11,9 +11,13 @@ router.use(authController.apiRoute);
 router.route('/testy')
   .get(authController.Testy)
 
-router.route('/getUser')
-  .get(userController.getUser)
+router.route('/getuser')
+  .get(userController.getUser);
 
+router.route('/buystock')
+  .post(userController.buyStock);
 
+router.route('/sellstock')
+  .post(userController.sellStock);
 
 export default router;

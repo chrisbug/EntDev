@@ -8,7 +8,7 @@ import { NavComponent } from './nav/nav.component';
 const coreRoutes: Routes =[
   {path: '', component: HomeComponent, pathMatch: 'full'},
 
-]
+];
 @NgModule({
   imports: [
     RouterModule.forRoot(coreRoutes)

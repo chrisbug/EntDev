@@ -9,23 +9,31 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" routerLink="/">Finance Orginizer</a>
+      <a class="navbar-brand" routerLink="/">Finance App</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" [ngClass]="{'navbar-collapse collapse in' : toggleMenu === true, 'navbar-collapse collapse' : toggleMenu === false}">
       <ul class="nav navbar-nav">
+        <li> <a routerLink="/soldstock">Sold Stock</a></li>
+        <li>
+          <a routerLink="/buystock">Buy Stock</a>
+        </li>
+        <li>
+          <a routerLink="/whatif">What If</a>
+        </li>
         <li class="dropdown" appDropdown>
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li routerLinkActive="active" (click)="onToggleMenu()"><a routerLink="/accounts">accounts</a></li>
+            <li routerLinkActive="active" (click)="onToggleMenu()"><a routerLink="/">Just an example</a></li>
+
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="!authservice.isAuthenticated()" (click)="onToggleMenu()"><a routerLink="/login">Login</a></li>
         <li *ngIf="!authservice.isAuthenticated()" (click)="onToggleMenu()"><a routerLink="/signup">Signup</a></li>
-        <li *ngIf="authservice.isAuthenticated()" (click)="authservice.logout()" (click)="onToggleMenu()">
+        <li *ngIf="authservice.isAuthenticated()" (click)="onLogout()" (click)="onToggleMenu()">
           <a routerLink="/">logout</a>
         </li>
       </ul>

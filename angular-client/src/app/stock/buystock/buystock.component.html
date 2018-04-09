@@ -1,0 +1,104 @@
+<div class="col-md-12 col-lg-12">
+  <div class="row">
+    <div class="col-md-2"><button (click)="showCoinStock()">Buy Coins</button></div>
+    <div class="col-md-2"><button (click)="showIseStock()">Buy ise</button></div>
+    <div class="col-md-2"><button (click)="showFtseStock()">Buy ftse</button></div>
+  </div>
+  <div class="row" style="border: solid 2px;">
+    <div class="col-lg-2">
+      <p>Company</p>
+    </div>
+    <div class="col-lg-2">
+      <p>Price</p>
+    </div>
+    <div class="col-lg-2">
+      <p>change</p>
+    </div>
+    <div class="col-lg-2">
+      <p>pChg</p>
+    </div>
+    <div class="col-lg-2">
+      <p>quantity</p>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 col-lg-12" *ngIf="showIse">
+  <div class="row" *ngFor="let stock of ise.data">
+    <div class="col-lg-2">
+      <p>{{stock.company}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p>{{stock.price}}</p>
+    </div>
+    <div class="col-lg-2" >
+      <p [ngStyle]="{'color':stock.change > 0 ? 'green' : 'red' }">{{stock.change}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p [ngStyle]="{'color':stock.change > 0 ? 'green' : 'red' }">{{stock.pChg}}</p>
+    </div>
+       <form
+        name="form" 
+        (ngSubmit)="onBuyStock(stock, f, 'ise')" 
+        #f="ngForm">
+        <div class="form-group col-lg-2">
+          <input 
+          class="form-control"
+          ngModel
+          type="number" 
+          name="qty" 
+          id="qty" />
+        </div>
+    <div class="col-lg-2">
+      <button type="submit">Buy</button>
+    </div>
+    </form>
+  </div>
+</div>
+<div class="col-md-12 col-lg-12" *ngIf="showFtse">
+  <div class="row" *ngFor="let stock of ftse.data">
+  <div class="col-lg-2">
+    <p>{{stock.company}}</p>
+  </div>
+  <div class="col-lg-2">
+    <p>{{stock.price}}</p>
+  </div>
+  <div class="col-lg-2">
+    <p [ngStyle]="{'color':stock.change > 0 ? 'green' : 'red' }">{{stock.change}}</p>
+  </div>
+  <div class="col-lg-2">
+    <p [ngStyle]="{'color':stock.change > 0 ? 'green' : 'red' }">{{stock.pChg}}</p>
+  </div>
+  <form name="form" (ngSubmit)="onBuyStock(stock, f, 'ftse')" #f="ngForm">
+    <div class="form-group col-lg-2">
+      <input class="form-control" ngModel type="number" name="qty" id="qty" />
+    </div>
+    <div class="col-lg-2">
+      <button type="submit">Buy</button>
+    </div>
+  </form>
+  </div>
+</div>
+<div class="col-md-12 col-lg-12" *ngIf="showCoin">
+  <div class="row"  *ngFor="let stock of coin.data">
+    <div class="col-lg-2">
+      <p>{{stock.company}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p>{{stock.price}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p [ngStyle]="{'color':stock.change > 0 ? 'green' : 'red' }">{{stock.change}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p [ngStyle]="{'color':stock.change > 0 ? 'green' : 'red' }">{{stock.pChg}}</p>
+    </div>
+    <form name="form" (ngSubmit)="onBuyStock(stock, f, 'coinranking')" #f="ngForm">
+      <div class="form-group col-lg-2">
+        <input class="form-control" ngModel type="number" name="qty" id="qty" />
+      </div>
+      <div class="col-lg-2">
+        <button type="submit">Buy</button>
+      </div>
+    </form>
+  </div>
+</div>

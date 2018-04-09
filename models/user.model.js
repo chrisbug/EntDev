@@ -6,20 +6,14 @@ module.exports = mongoose.model('User', new Schema({
   email: String,
   salt: String,
   hash: String,
-  holdings: [{
-    company: String,
-    symbol: String,
-    purchesPrice: Number,
-    dateIn : Date,
-    Qty: Number
-  }],
+  holdings: [],
   soldHoldings:[{
     company: String,
     symbol: String,
     purchesPrice: Number,
     sellPrice: Number,
-    dateIn : Date,
-    dateOut: Date,
+    dateIn : Number,
+    dateOut: Number,
     Qty: Number
   }]
 }));

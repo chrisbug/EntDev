@@ -1,0 +1,42 @@
+<div class="col-md-12 col-lg-12">
+  <div class="row" style="border: solid 2px;">
+    <div class="col-lg-2">
+      <p>Company</p>
+    </div>
+    <div class="col-lg-2">
+      <p>Total Sale Value</p>
+    </div>
+    <div class="col-lg-2">
+      <p>Quantity</p>
+    </div>
+    <div class="col-lg-2">
+      <p>Date In</p>
+    </div>
+    <div class="col-lg-2">
+      <p>Date Out</p>
+    </div>
+    <div class="col-lg-2">
+      <p>Profit</p>
+    </div>
+  </div>
+  <div class="row" *ngFor="let stock of user.soldHoldings">
+    <div class="col-lg-2">
+      <p>{{stock.company}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p>{{stock.sellPrice * stock.Qty | number:maxFractionDigits}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p>{{stock.Qty}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p>{{stock.dateIn | date:'shortDate'}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p>{{stock.dateOut | date:'shortDate'}}</p>
+    </div>
+    <div class="col-lg-2">
+      <p>{{((stock.sellPrice * stock.Qty) - (stock.purchesPrice * stock.Qty)) | number:maxFractionDigits}}</p>
+    </div>
+  </div>
+</div>

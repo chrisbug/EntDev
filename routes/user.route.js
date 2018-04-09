@@ -15,4 +15,7 @@ router.route('/signup')
 router.route('/test')
   .get(userController.test);
 
+router.route('/getuser')
+  .get(userController.getUser)
+
 export default router;

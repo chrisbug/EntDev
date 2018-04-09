@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from  '@angular/forms';
-import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { AuthenticationService } from '../../_services/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,16 +9,29 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  loading = false;
+  error = '';
 
-  constructor(private authservice : AuthService) { }
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
   }
 
-  onSignup(form : NgForm){
+  onSignup(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
-    this.authservice.signupUser(email, password);
+    this.authenticationService.signup(email, password)
+      .subscribe(result => {
+        if (result === true) {
+          // login successful
+          this.router.navigate(['/']);
+        } else {
+          // any failure
+          this.error = 'email or password incorrect please try again';
+          this.loading = false;
+        }
+      });
   }
 
 }
