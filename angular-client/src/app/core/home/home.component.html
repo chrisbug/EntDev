@@ -103,5 +103,48 @@
       </div>
     </div>
   </div>
+
+  <div class="row" style="border: solid 2px;" *ngIf="user.holdings" [ngStyle]="{'background':getGrossProfitAfterSaleCost() - getTotalPurchesPrice() > 0 ? '#98FB98': '#FFCCCC'}">
+    <div class="col-lg-2">
+      <div class="row">
+        <p>Total Purchas Cost</p>
+      </div>
+      <div class="row">
+        <p>{{getTotalPurchesPrice() | number:maxFractionDigits}}</p>
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+    <p>Total Sell Costs = {{getTotalSellPrice() | number:maxFractionDigits}}</p>
+    </div>
+
+    <div class="col-lg-2">
+      <div class="row">
+      <p> Gross Present Value</p>
+      </div>
+      <div class="row">
+        <p>{{getTotalValue() | number:maxFractionDigits}}</p>
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+      <div class ="row">
+        <p> GPV after Sale Cost</p>
+      </div>
+      <div class="row">
+        <p>{{getGrossProfitAfterSaleCost() | number:maxFractionDigits}}</p>
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+      <div class="row">
+      <p>Gross Profit/Loss</p>
+      </div>
+      <div class="row">
+        <p>{{getGrossProfitAfterSaleCost() - getTotalPurchesPrice() | number:maxFractionDigits}}</p>
+      </div>
+    </div>
+
+  </div>
   
 </div>

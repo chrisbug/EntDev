@@ -17,10 +17,6 @@ export class HomeComponent implements OnInit {
   ftseResult: StockObject;
   coinResult: StockObject;
   user: User;
-  totalPurchesPrice = 0;
-  totalSellCost = 0;
-  grossPresentValue = 0;
-  gpvAfterSC = 0;
 
   constructor(private scraper: ScraperService,
               private auth: AuthenticationService,
@@ -113,28 +109,30 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  setTotalPurchesPrice() {
+  getTotalPurchesPrice() {
     let totalPurchesPrice = 0;
     for (const userh of this.user.holdings) {
       totalPurchesPrice += userh.price * userh.qty;
     }
-    this.totalPurchesPrice = totalPurchesPrice;
+     return totalPurchesPrice;
   }
 
-  setTotalValue() {
-    let totalValue = 0;
-    for (const userh of this.user.holdings) {
-      let currentValue = 0;
-      if (userh.exchange === 'ise') {
-        currentValue = this.findCompany(this.iseResult.data, userh.company);
-      } else if ( userh.exchange === 'ftse') {
-        currentValue = this.findCompany(this.ftseResult.data, userh.company);
-      } else {
-        currentValue = this.findCompany(this.coinResult.data, userh.company);
+  getTotalValue() {
+    if (this.iseResult && this.coinResult && this.ftseResult && this.user) {
+      let totalValue = 0;
+      for (const userh of this.user.holdings) {
+        let currentValue = 0;
+        if (userh.exchange === 'ise') {
+          currentValue = this.findCompany(this.iseResult.data, userh.company);
+        } else if ( userh.exchange === 'ftse') {
+          currentValue = this.findCompany(this.ftseResult.data, userh.company);
+        } else {
+          currentValue = this.findCompany(this.coinResult.data, userh.company);
+        }
+        totalValue += currentValue * userh.qty;
       }
-      totalValue += currentValue * userh.qty;
-    }
-    return totalValue;
+      return totalValue;
+    } else { return 0; }
   }
 
   getTotalSellPrice() {
@@ -158,7 +156,7 @@ export class HomeComponent implements OnInit {
   }
 
   getGrossProfitAfterSaleCost() {
-    return this.setTotalValue() - this.getTotalSellPrice();
+      return this.getTotalValue() - this.getTotalSellPrice();
   }
 
 }
