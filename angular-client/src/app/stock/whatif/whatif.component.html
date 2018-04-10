@@ -84,15 +84,15 @@
 
     <div class="col-md-1">
       <!-- gain loss -->
-      <p [ngStyle]="{'color':(whatIfPrice * whatIfStockSelected.qty) - (whatIfStockSelected.qty * whatIfStockSelected.price) > 0 ? 'green': 'red' }">
-        {{ ( whatIfPrice * whatIfStockSelected.qty) - (whatIfStockSelected.qty * whatIfStockSelected.price)  | number:maxFractionDigits}}
+      <p [ngStyle]="{'color':getGainLossWhatIf() > 0 ? 'green': 'red' }">
+        {{ getGainLossWhatIf()  | number:maxFractionDigits}}
       </p>
     </div>
 
     <div class="col-md-1">
       <!-- gain loss % -->
-      <p [ngStyle]="{'color': (((whatIfPrice * whatIfStockSelected.qty) - (whatIfStockSelected.qty * whatIfStockSelected.price)) / (whatIfStockSelected.qty * whatIfStockSelected.price)) *100 > 0 ? 'green' : 'red' }">
-        {{(((whatIfPrice * whatIfStockSelected.qty) - (whatIfStockSelected.qty * whatIfStockSelected.price)) / (whatIfStockSelected.qty * whatIfStockSelected.price)) *100 | number:maxFractionDigits}} %
+      <p [ngStyle]="{'color':getGainLossWhatIfPer() > 0 ? 'green': 'red' }">
+        {{ getGainLossWhatIfPer() | number:maxFractionDigits}}
       </p>
     </div>
 
@@ -111,98 +111,59 @@
         <!-- company -->
         <p>{{value.company}}</p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- symbol  -->
         <p>{{value.exchange}}</p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- Date In -->
         <p>{{value.date | date:'shortDate'}}</p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- Qty -->
         <p>{{value.qty}}</p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- Cost -->
         <p>{{value.qty*value.price | number:maxFractionDigits}}</p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- Purches price -->
         <p>{{value.price}}</p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- price -->
-        <p *ngIf="value.exchange === 'ise'">
-          {{ findCompany(iseResult.data, value.company) | number:maxFractionDigits}}
-        </p>
-        <p *ngIf="value.exchange === 'ftse'">
-          {{ findCompany(ftseResult.data, value.company) | number:maxFractionDigits}}
-        </p>
-        <p *ngIf="value.exchange === 'coinranking'">
-          {{ findCompany(coinResult.data, value.company) | number:maxFractionDigits}}
-        </p>
+        <p>{{getCurrentValueOfStock(value.exchange, value.company)}}</p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- value  -->
-        <p *ngIf="value.exchange === 'ise'">
-          {{ (findCompany(iseResult.data, value.company) * value.qty) | number:maxFractionDigits}}
-        </p>
-        <p *ngIf="value.exchange === 'ftse'">
-          {{ (findCompany(ftseResult.data, value.company) * value.qty) | number:maxFractionDigits}}
-        </p>
-        <p *ngIf="value.exchange === 'coinranking'">
-          {{ (findCompany(coinResult.data, value.company) * value.qty) | number:maxFractionDigits}}
-        </p>
+        <p> {{ getValue(value) | number:maxFractionDigits }} </p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- gain loss -->
-        <p *ngIf="value.exchange === 'ise'" [ngStyle]="{'color':( (findCompany(coinResult.data, value.company)*value.qty) - (value.qty*value.price) ) > 0 ? 'green': 'red' }">
-          {{ ( (findCompany(iseResult.data, value.company)*value.qty) - (value.qty*value.price) ) | number:maxFractionDigits}}
-        </p>
-        <p *ngIf="value.exchange === 'ftse'" [ngStyle]="{'color':( (findCompany(ftseResult.data, value.company)*value.qty) - (value.qty*value.price) ) > 0 ? 'green': 'red' }">
-          {{ ( (findCompany(ftseResult.data, value.company)*value.qty) - (value.qty*value.price) ) | number:maxFractionDigits}}
-        </p>
-        <p *ngIf="value.exchange === 'coinranking'" [ngStyle]="{'color':( (findCompany(coinResult.data, value.company)*value.qty) - (value.qty*value.price) ) > 0 ? 'green' : 'red' }">
-          {{ ( (findCompany(coinResult.data, value.company)*value.qty) - (value.qty*value.price) ) | number:maxFractionDigits }}
+        <p [ngStyle]="{'color':getGainLoss(value) > 0 ? 'green': 'red'}">
+          {{ getGainLoss(value) | number:maxFractionDigits }}
         </p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- gain loss % -->
-        <p *ngIf="value.exchange === 'ise'" [ngStyle]="{'color':( ( (findCompany(iseResult.data, value.company) * value.qty) - (value.qty*value.price) )/ (value.qty*value.price) )*100 > 0 ? 'green' : 'red' }">
-          {{( ( (findCompany(iseResult.data, value.company) * value.qty) - (value.qty*value.price) )/ (value.qty*value.price) )*100
-          | number:maxFractionDigits}} %
-        </p>
-        <p *ngIf="value.exchange === 'ftse'" [ngStyle]="{'color':( ( (findCompany(ftseResult.data, value.company) * value.qty) - (value.qty*value.price) )/ (value.qty*value.price) )*100 > 0 ? 'green' : 'red' }">
-          {{( ( (findCompany(ftseResult.data, value.company) * value.qty) - (value.qty*value.price) )/ (value.qty*value.price) )*100
-          | number:maxFractionDigits}} %
-        </p>
-        <p *ngIf="value.exchange === 'coinranking'" [ngStyle]="{'color':( ( (findCompany(coinResult.data, value.company) * value.qty) - (value.qty*value.price) )/ (value.qty*value.price) )*100 > 0 ? 'green' : 'red' }">
-          {{( ( (findCompany(coinResult.data, value.company) * value.qty) - (value.qty*value.price) )/ (value.qty*value.price) )*100
-          | number:maxFractionDigits}} %
+        <p [ngStyle]="{'color':getGainLossPer(value) > 0 ? 'green': 'red'}">
+          {{getGainLossPer(value) | number:maxFractionDigits }}
         </p>
       </div>
-
+  
       <div class="col-md-1">
         <!-- sale cost  -->
-        <p *ngIf="value.exchange === 'ise'">
-          {{(saleValue(findCompany(iseResult.data, value.company) * value.qty)) | number:maxFractionDigits}}
-        </p>
-        <p *ngIf="value.exchange === 'ftse'">
-          {{(saleValue(findCompany(ftseResult.data, value.company) * value.qty)) | number:maxFractionDigits}}
-        </p>
-        <p *ngIf="value.exchange === 'coinranking'">
-          {{(saleValue(findCompany(coinResult.data, value.company) * value.qty)) | number:maxFractionDigits}}
-        </p>
+        <p>{{getSaleValue(value)| number:maxFractionDigits }}</p>
       </div>
 
       <div class="col-md-1">

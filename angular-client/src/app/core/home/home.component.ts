@@ -1,3 +1,4 @@
+import { UserHolding } from './../../_models/userholding.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ScraperService } from '../../_services/scraper.service';
 import { StockObject } from '../../_models/stockobject.model';
@@ -16,6 +17,10 @@ export class HomeComponent implements OnInit {
   ftseResult: StockObject;
   coinResult: StockObject;
   user: User;
+  totalPurchesPrice = 0;
+  totalSellCost = 0;
+  grossPresentValue = 0;
+  gpvAfterSC = 0;
 
   constructor(private scraper: ScraperService,
               private auth: AuthenticationService,
@@ -36,10 +41,64 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  getValue(stock: UserHolding) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      console.log(stock.qty * this.getCurrentValueOfStock(stock.exchange, stock.company));
+      return stock.qty * this.getCurrentValueOfStock(stock.exchange, stock.company);
+    } else {
+      return 0;
+    }
+  }
+
+  getPrice(stock: UserHolding) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      console.log(this.getCurrentValueOfStock(stock.exchange, stock.company));
+      return this.getCurrentValueOfStock(stock.exchange, stock.company);
+    } else { return 0; }
+  }
+
+  getSaleValue(stock: UserHolding) {
+    return this.saleValue(this.getValue(stock));
+  }
+
+  getGainLoss(stock: UserHolding) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      let cost = stock.price * stock.qty;
+      cost += this.getSaleValue(stock);
+      const stockvalue = this.getValue(stock);
+      const price = this.getCurrentValueOfStock(stock.exchange, stock.company);
+      const salePrice = this.saleValue(stockvalue);
+      return stockvalue - cost;
+    } else { return 0; }
+  }
+
+  getGainLossPer(stock: UserHolding) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      return ( this.getGainLoss(stock) / (stock.price * stock.qty) ) * 100;
+    } else { return 0; }
+  }
+
+  getCurrentValueOfStock(exchange: string, companyName: string) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      if (exchange === 'ise') {
+        return this.findCompany(this.iseResult.data, companyName);
+      } else if (exchange === 'ftse') {
+        return this.findCompany(this.ftseResult.data, companyName);
+      } else {
+        return this.findCompany(this.coinResult.data, companyName);
+      }
+    } else { return 0; }
+  }
+
+
   findCompany(result: any[], curretnval: string ) {
-    let x = result.filter(val => val.company === curretnval)[0].price;
-    x = Number(x.toString().replace(',', ''));
-    return x;
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      let x = result.filter(val => val.company === curretnval)[0].price;
+      x = Number(x.toString().replace(',', ''));
+      return x;
+    } else {
+      return 0;
+    }
   }
 
   saleValue(value: number) {
@@ -53,4 +112,53 @@ export class HomeComponent implements OnInit {
       return (value * 0.01) + 1.25;
     }
   }
+
+  setTotalPurchesPrice() {
+    let totalPurchesPrice = 0;
+    for (const userh of this.user.holdings) {
+      totalPurchesPrice += userh.price * userh.qty;
+    }
+    this.totalPurchesPrice = totalPurchesPrice;
+  }
+
+  setTotalValue() {
+    let totalValue = 0;
+    for (const userh of this.user.holdings) {
+      let currentValue = 0;
+      if (userh.exchange === 'ise') {
+        currentValue = this.findCompany(this.iseResult.data, userh.company);
+      } else if ( userh.exchange === 'ftse') {
+        currentValue = this.findCompany(this.ftseResult.data, userh.company);
+      } else {
+        currentValue = this.findCompany(this.coinResult.data, userh.company);
+      }
+      totalValue += currentValue * userh.qty;
+    }
+    return totalValue;
+  }
+
+  getTotalSellPrice() {
+    if (this.iseResult && this.coinResult && this.ftseResult && this.user) {
+      let totalSalePrice = 0;
+      for (const userh of this.user.holdings) {
+        let currentValue = 0;
+        if (userh.exchange === 'ise') {
+          currentValue = this.findCompany(this.iseResult.data, userh.company);
+        } else if (userh.exchange === 'ftse') {
+          currentValue = this.findCompany(this.ftseResult.data, userh.company);
+        } else {
+          currentValue = this.findCompany(this.coinResult.data, userh.company);
+        }
+        totalSalePrice += this.saleValue(currentValue * userh.qty);
+      }
+      return totalSalePrice;
+    } else {
+      return 0;
+    }
+  }
+
+  getGrossProfitAfterSaleCost() {
+    return this.setTotalValue() - this.getTotalSellPrice();
+  }
+
 }

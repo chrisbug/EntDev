@@ -70,7 +70,6 @@ export class BuystockComponent implements OnInit {
       exchange: exchange,
       date: Date.now()
     };
-    this.userService.addToUserStock(boughtStock);
     this.stockService.buyStock(boughtStock).subscribe(
        result => {this.userService.addToUserStock(boughtStock);
       });

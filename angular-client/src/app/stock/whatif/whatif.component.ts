@@ -40,10 +40,64 @@ export class WhatifComponent implements OnInit {
     console.log(this.whatIfStockSelected);
   }
 
+  getValue(stock: UserHolding) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      console.log(stock.qty * this.getCurrentValueOfStock(stock.exchange, stock.company));
+      return stock.qty * this.getCurrentValueOfStock(stock.exchange, stock.company);
+    } else {
+      return 0;
+    }
+  }
+
+  getPrice(stock: UserHolding) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      console.log(this.getCurrentValueOfStock(stock.exchange, stock.company));
+      return this.getCurrentValueOfStock(stock.exchange, stock.company);
+    } else { return 0; }
+  }
+
+  getSaleValue(stock: UserHolding) {
+    return this.saleValue(this.getValue(stock));
+  }
+
+  getGainLoss(stock: UserHolding) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      let cost = stock.price * stock.qty;
+      cost += this.getSaleValue(stock);
+      const stockvalue = this.getValue(stock);
+      const price = this.getCurrentValueOfStock(stock.exchange, stock.company);
+      const salePrice = this.saleValue(stockvalue);
+      return stockvalue - cost;
+    } else { return 0; }
+  }
+
+  getGainLossPer(stock: UserHolding) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      return (this.getGainLoss(stock) / (stock.price * stock.qty)) * 100;
+    } else { return 0; }
+  }
+
+  getCurrentValueOfStock(exchange: string, companyName: string) {
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      if (exchange === 'ise') {
+        return this.findCompany(this.iseResult.data, companyName);
+      } else if (exchange === 'ftse') {
+        return this.findCompany(this.ftseResult.data, companyName);
+      } else {
+        return this.findCompany(this.coinResult.data, companyName);
+      }
+    } else { return 0; }
+  }
+
+
   findCompany(result: any[], curretnval: string) {
-    const x: UserHolding = result.filter(val => val.company === curretnval)[0];
-    const y: Number = Number(x.price.toString().replace(',', ''));
-    return y;
+    if (this.iseResult && this.coinResult && this.ftseResult) {
+      let x = result.filter(val => val.company === curretnval)[0].price;
+      x = Number(x.toString().replace(',', ''));
+      return x;
+    } else {
+      return 0;
+    }
   }
 
   saleValue(value: number) {
@@ -56,6 +110,17 @@ export class WhatifComponent implements OnInit {
     } else {
       return (value * 0.01) + 1.25;
     }
+  }
+
+  getGainLossWhatIf() {
+    let cost = this.whatIfStockSelected.price * this.whatIfStockSelected.qty;
+    cost += this.getSaleValue(this.whatIfStockSelected);
+    const stockvalue = this.whatIfPrice * this.whatIfStockSelected.qty;
+    return stockvalue - cost;
+  }
+
+  getGainLossWhatIfPer() {
+    return (this.getGainLossWhatIf() / (this.whatIfStockSelected.price * this.whatIfStockSelected.qty))*100;
   }
 
   setWhatIfStock(value: UserHolding) {
