@@ -9,12 +9,21 @@ import config from './config';
 import User from './models/user.model';
 import userRoutes from './routes/user.route';
 import authRoutes from './routes/auth.route';
+import fs from 'fs';
+import index from './routes/index';
+const key = fs.readFileSync('./key/private.key');
+const cert = fs.readFileSync('./key/server.crt');
+const ca = fs.readFileSync('./key/server.crt');
 
-
+const serverOptions = {
+  key: key,
+  cert: cert,
+  ca: ca
+}
 const app = express();
-const http = require('http').Server(app);
+const http = require('https').Server(serverOptions, app);
 // set the port
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 443;
 
 const apiRoutes = express.Router();
 
@@ -54,9 +63,7 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 //Tester connection
-app.get('/', function(req, res){
-  res.send('Hello api is working');
-});
+app.get('/', index);
 
 //app.use('/api/auth', authRoutes);
 app.use('/api/user/', userRoutes);
