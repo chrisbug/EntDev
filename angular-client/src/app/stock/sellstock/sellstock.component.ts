@@ -8,6 +8,7 @@ import { UserService } from './../../_services/user.service';
 import { UserHolding } from './../../_models/userholding.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { NgStyle, DatePipe, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-sellstock',

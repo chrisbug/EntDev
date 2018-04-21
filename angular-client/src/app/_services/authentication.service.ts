@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthenticationService {
   public token: string;
-  public url = 'http://127.0.0.1:3001/api/';
+  public url = 'https://34.244.22.138:443/api/';
 
   constructor(private http: HttpClient) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));

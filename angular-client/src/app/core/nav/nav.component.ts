@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   toggleMenu = false;
   constructor(
-    private authservice: AuthenticationService,
+    public authservice: AuthenticationService,
     private userS: UserService,
     private router: Router
   ) { }
