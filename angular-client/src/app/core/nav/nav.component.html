@@ -15,18 +15,40 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" [ngClass]="{'navbar-collapse collapse in' : toggleMenu === true, 'navbar-collapse collapse' : toggleMenu === false}">
       <ul class="nav navbar-nav">
-        <li> <a routerLink="/soldstock">Sold Stock</a></li>
-        <li>
+        <li *ngIf="authservice.isAuthenticated()">
+          <a routerLink="/">Your Stock</a>
+        </li>
+        <li *ngIf="authservice.isAuthenticated()"> <a routerLink="/soldstock">Sold Stock</a></li>
+        <li *ngIf="authservice.isAuthenticated()">
           <a routerLink="/buystock">Buy Stock</a>
         </li>
-        <li>
+        <li *ngIf="authservice.isAuthenticated()">
           <a routerLink="/whatif">What If</a>
         </li>
         <li class="dropdown" appDropdown>
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Test Cases
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
-            <li routerLinkActive="active" (click)="onToggleMenu()"><a routerLink="/">Just an example</a></li>
-
+            <li routerLinkActive="active" (click)="onToggleMenu()">
+              <a routerLink="/test/0">Orignal sample</a>
+            </li>
+            <li routerLinkActive="active" (click)="onToggleMenu()">
+              <a routerLink="/test/1">Case 1 +10%</a>
+            </li>
+            <li routerLinkActive="active" (click)="onToggleMenu()">
+              <a routerLink="/test/2">Case 2 -10%</a>
+            </li>
+            <li routerLinkActive="active" (click)="onToggleMenu()">
+              <a routerLink="/test/3">Case 3 +20%</a>
+            </li>
+            <li routerLinkActive="active" (click)="onToggleMenu()">
+              <a routerLink="/test/4">Case 4 -20%</a>
+            </li>
+            <li routerLinkActive="active" (click)="onToggleMenu()">
+              <a routerLink="/test/5">Case 5 +100%</a>
+            </li>
+        
           </ul>
         </li>
       </ul>

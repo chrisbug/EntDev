@@ -105,8 +105,9 @@
   </div>
 </div>
   
-  <div class="row" style="border: solid 2px;" *ngIf="user.holdings">
+  <div class="row" style="border: solid 2px;" *ngIf="user.holdings" id="stockbox">
     <div class="col-md-12 col-lg-12" *ngFor="let value of user.holdings; let i = index">
+      <hr>
       <div class="col-md-1">
         <!-- company -->
         <p>{{value.company}}</p>
@@ -167,7 +168,7 @@
       </div>
 
       <div class="col-md-1">
-        <button type="submit" (click)="setWhatIfStock(value)">What If
+        <button type="submit" class="btn btn-primary" (click)="setWhatIfStock(value)">What If
         </button>
       </div>
     </div>

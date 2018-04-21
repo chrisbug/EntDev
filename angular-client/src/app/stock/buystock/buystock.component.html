@@ -1,8 +1,21 @@
 <div class="col-md-12 col-lg-12">
   <div class="row">
-    <div class="col-md-2"><button (click)="showCoinStock()">Buy Coins</button></div>
-    <div class="col-md-2"><button (click)="showIseStock()">Buy ise</button></div>
-    <div class="col-md-2"><button (click)="showFtseStock()">Buy ftse</button></div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button class="btn btn-default" (click)="showIseStock()">Buy ise</button>
+      </li>
+      <li></li>
+      <li class="nav-item">
+        <button class="btn btn-default" (click)="showFtseStock()">Buy ftse</button>
+      </li>
+      <li></li>
+      <li class="nav-item">
+          <button class="btn btn-default" (click)="showCoinStock()">Buy Coins</button>
+      </li>
+    </ul>
+    <!-- <div class="col-md-2"><button class="btn btn-info" (click)="showCoinStock()">Buy Coins</button></div>
+    <div class="col-md-2"><button class="btn btn-info" (click)="showIseStock()">Buy ise</button></div>
+    <div class="col-md-2"><button class="btn btn-info" (click)="showFtseStock()">Buy ftse</button></div> -->
   </div>
   <div class="row" style="border: solid 2px;">
     <div class="col-lg-2">
@@ -22,8 +35,9 @@
     </div>
   </div>
 </div>
-<div class="col-md-12 col-lg-12" *ngIf="showIse">
+<div class="col-md-12 col-lg-12" style="border: solid 2px;" *ngIf="showIse" id="stockbox">
   <div class="row" *ngFor="let stock of ise.data">
+    <hr>
     <div class="col-lg-2">
       <p>{{stock.company}}</p>
     </div>
@@ -49,13 +63,14 @@
           id="qty" />
         </div>
     <div class="col-lg-2">
-      <button type="submit">Buy</button>
+      <button type="submit"  class="btn btn-danger">Buy</button>
     </div>
     </form>
   </div>
 </div>
-<div class="col-md-12 col-lg-12" *ngIf="showFtse">
+<div class="col-md-12 col-lg-12" style="border: solid 2px;" *ngIf="showFtse" id="stockbox">
   <div class="row" *ngFor="let stock of ftse.data">
+    <hr>
   <div class="col-lg-2">
     <p>{{stock.company}}</p>
   </div>
@@ -73,13 +88,14 @@
       <input class="form-control" ngModel type="number" name="qty" id="qty" />
     </div>
     <div class="col-lg-2">
-      <button type="submit">Buy</button>
+      <button type="submit"  class="btn btn-danger">Buy</button>
     </div>
   </form>
   </div>
 </div>
-<div class="col-md-12 col-lg-12" *ngIf="showCoin">
+<div class="col-md-12 col-lg-12" style="border: solid 2px;" *ngIf="showCoin" id="stockbox">
   <div class="row"  *ngFor="let stock of coin.data">
+    <hr>
     <div class="col-lg-2">
       <p>{{stock.company}}</p>
     </div>
@@ -97,7 +113,7 @@
         <input class="form-control" ngModel type="number" name="qty" id="qty" />
       </div>
       <div class="col-lg-2">
-        <button type="submit">Buy</button>
+        <button type="submit" class="btn btn-danger">Buy</button>
       </div>
     </form>
   </div>

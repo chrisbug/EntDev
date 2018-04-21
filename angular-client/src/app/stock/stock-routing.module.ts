@@ -1,3 +1,4 @@
+import { TestsComponent } from './tests/tests.component';
 import { SoldstockComponent } from './soldstock/soldstock.component';
 import { BuystockComponent } from './buystock/buystock.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -12,7 +13,10 @@ const stockRoutes: Routes = [
     {path: ':id', component: SellstockComponent}
   ] },
   { path: 'soldstock', component: SoldstockComponent},
-  { path: 'whatif', component: WhatifComponent}
+  { path: 'whatif', component: WhatifComponent},
+  { path: 'test', children: [
+    {path: ':case', component: TestsComponent}
+  ]}
 ];
 
 @NgModule({

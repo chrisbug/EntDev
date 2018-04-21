@@ -6,6 +6,7 @@ import { SellstockComponent } from './sellstock/sellstock.component';
 import { StockRoutingModule } from './stock-routing.module';
 import { SoldstockComponent } from './soldstock/soldstock.component';
 import { WhatifComponent } from './whatif/whatif.component';
+import { TestsComponent } from './tests/tests.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { WhatifComponent } from './whatif/whatif.component';
     SellstockComponent,
     BuystockComponent,
     SoldstockComponent,
-    WhatifComponent
+    WhatifComponent,
+    TestsComponent
   ],
   exports: [
     StockRoutingModule,

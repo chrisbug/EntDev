@@ -41,6 +41,18 @@ export class BuystockComponent implements OnInit {
     });
   }
 
+  getShowCoin() {
+    return this.showCoin;
+  }
+
+  getShowIse() {
+    return this.showIse;
+  }
+
+  getShowFtse() {
+    return this.showFtse;
+  }
+
   showCoinStock() {
     this.showIse = false;
     this.showFtse = false;

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserHolding } from './../../_models/userholding.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ScraperService } from '../../_services/scraper.service';
@@ -20,11 +21,14 @@ export class HomeComponent implements OnInit {
 
   constructor(private scraper: ScraperService,
               private auth: AuthenticationService,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
               }
 
   ngOnInit() {
-    console.log(this.auth.isAuthenticated());
+    if (!this.auth.isAuthenticated()) {
+      this.router.navigate(['login']);
+    }
     this.scraper.listall().subscribe(result => {
       console.log(result);
       this.iseResult = result.ise;
@@ -70,7 +74,7 @@ export class HomeComponent implements OnInit {
 
   getGainLossPer(stock: UserHolding) {
     if (this.iseResult && this.coinResult && this.ftseResult) {
-      return ( this.getGainLoss(stock) / (stock.price * stock.qty) ) * 100;
+      return ( this.getGainLoss(stock) / (stock.price * stock.qty) );
     } else { return 0; }
   }
 

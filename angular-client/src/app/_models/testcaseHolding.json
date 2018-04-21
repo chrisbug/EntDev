@@ -1,0 +1,141 @@
+{
+  "holdings": [
+    {
+    "company": "AIB",
+    "symbol": "AIBG.I",
+    "price": 5.00,
+    "qty": 1000,
+    "exchange": "ise",
+    "date": 1524317549375
+    },
+    {
+      "company": "Bank of Ireland",
+      "symbol": "BIRG.I",
+      "price": 4.00,
+      "qty": 1000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "Bank of Ireland",
+      "symbol": "BIRG.I",
+      "price": 3.50,
+      "qty": 2000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "Bank of Ireland",
+      "symbol": "BIRG.I",
+      "price": 3.00,
+      "qty": 3000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "Bank of Ireland",
+      "symbol": "BIRG.I",
+      "price": 3.50,
+      "qty": 1000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "Bank of Ireland",
+      "symbol": "BIRG.I",
+      "price": 3.50,
+      "qty": 2000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "Bank of Ireland",
+      "symbol": "BIRG.I",
+      "price": 4.00,
+      "qty": 3000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "Bank of Ireland",
+      "symbol": "BIRG.I",
+      "price": 5.50,
+      "qty": 4000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "CRH",
+      "symbol": "CRH.I",
+      "price": 20.00,
+      "qty": 3000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "CRH",
+      "symbol": "CRH.I",
+      "price": 25.00,
+      "qty": 1000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+
+    {
+      "company": "CRH",
+      "symbol": "CRH.I",
+      "price": 30.00,
+      "qty": 2000,
+      "exchange": "ise",
+      "date": 1524317549375
+    },
+    {
+      "company": "Tesco",
+      "symbol": "TSCO",
+      "price": 3.00,
+      "qty": 4000,
+      "exchange": "ftse",
+      "date": 1524317549375
+    },
+    {
+      "company": "Tesco",
+      "symbol": "TSCO",
+      "price": 2.50,
+      "qty": 8000,
+      "exchange": "ftse",
+      "date": 1524317549375
+    },
+    {
+      "company": "Tesco",
+      "symbol": "TSCO",
+      "price": 4.50,
+      "qty": 2000,
+      "exchange": "ftse",
+      "date": 1524317549375
+    },
+    {
+      "company": "Ripple",
+      "symbol": "ripple-xrp",
+      "price": 2.00,
+      "qty": 3000,
+      "exchange": "coinranking",
+      "date": 1524317549375
+    },
+
+    {
+      "company": "Ripple",
+      "symbol": "ripple-xrp",
+      "price": 2.50,
+      "qty": 1000,
+      "exchange": "coinranking",
+      "date": 1524317549375
+    },
+    {
+      "company": "Ripple",
+      "symbol": "ripple-xrp",
+      "price": 3.00,
+      "qty": 2000,
+      "exchange": "coinranking",
+      "date": 1524317549375
+    }
+]}

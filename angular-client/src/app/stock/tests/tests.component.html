@@ -38,6 +38,69 @@
   </div>
 
   <div class="row" style="border: solid 2px;" *ngIf="user.holdings" id="stockbox">
+    <div class="col-md-12 col-lg-12">
+      <hr>
+      <div class="col-md-1">
+        <!-- company -->
+        <p>Cash Holdings</p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- symbol  -->
+        <p></p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- Date In -->
+        <p></p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- Qty -->
+        <p>1</p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- Cost -->
+        <p>100.00</p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- Purches price -->
+        <p></p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- price -->
+        <p></p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- value  -->
+        <p> 100 </p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- gain loss -->
+        <p>
+          
+        </p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- gain loss % -->
+        <p></p>
+      </div>
+    
+      <div class="col-md-1">
+        <!-- sale cost  -->
+        <p></p>
+      </div>
+    
+      <div class="col-md-1">
+        <p></p>
+      </div>
+    </div>
     <div class="col-md-12 col-lg-12" *ngFor="let value of user.holdings; let i = index">
       <hr>
       <div class="col-md-1">
@@ -82,7 +145,7 @@
 
       <div class="col-md-1">
         <!-- gain loss -->
-        <p [ngStyle]="{'color':getGainLoss(value) > 0 ? 'green': 'red'}"> 
+        <p [ngStyle]="{'color':getGainLoss(value) > 0 ? 'green': 'red'}">
           {{ getGainLoss(value) | number:maxFractionDigits }}
         </p>
       </div>
@@ -100,7 +163,6 @@
       </div>
 
       <div class="col-md-1">
-        <a routerLink="/sellstock/{{i}}"><button type="submit" class="btn btn-success" >SELL</button></a>
       </div>
     </div>
   </div>
@@ -116,12 +178,17 @@
     </div>
 
     <div class="col-lg-2">
-    <p>Total Sell Costs = {{getTotalSellPrice() | number:maxFractionDigits}}</p>
+      <div class="row">
+        <p>Total Sell Costs</p>
+      </div>
+      <div class="row">
+        <p>{{getTotalSellPrice() | number:maxFractionDigits}}</p>
+      </div>
     </div>
 
     <div class="col-lg-2">
       <div class="row">
-      <p> Gross Present Value</p>
+        <p> Gross Present Value</p>
       </div>
       <div class="row">
         <p>{{getTotalValue() | number:maxFractionDigits}}</p>
@@ -129,7 +196,7 @@
     </div>
 
     <div class="col-lg-2">
-      <div class ="row">
+      <div class="row">
         <p> GPV after Sale Cost</p>
       </div>
       <div class="row">
@@ -139,7 +206,7 @@
 
     <div class="col-lg-2">
       <div class="row">
-      <p>Gross Profit/Loss</p>
+        <p>Gross Profit/Loss</p>
       </div>
       <div class="row">
         <p>{{getGrossProfitAfterSaleCost() - getTotalPurchesPrice() | number:maxFractionDigits}}</p>
@@ -147,5 +214,5 @@
     </div>
 
   </div>
-  
+
 </div>

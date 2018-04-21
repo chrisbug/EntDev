@@ -19,24 +19,27 @@
       <p>Profit</p>
     </div>
   </div>
-  <div class="row" *ngFor="let stock of user.soldHoldings">
-    <div class="col-lg-2">
-      <p>{{stock.company}}</p>
-    </div>
-    <div class="col-lg-2">
-      <p>{{stock.sellPrice * stock.Qty | number:maxFractionDigits}}</p>
-    </div>
-    <div class="col-lg-2">
-      <p>{{stock.Qty}}</p>
-    </div>
-    <div class="col-lg-2">
-      <p>{{stock.dateIn | date:'shortDate'}}</p>
-    </div>
-    <div class="col-lg-2">
-      <p>{{stock.dateOut | date:'shortDate'}}</p>
-    </div>
-    <div class="col-lg-2">
-      <p>{{((stock.sellPrice * stock.Qty) - (stock.purchesPrice * stock.Qty)) | number:maxFractionDigits}}</p>
+  <div id="stockbox">
+    <div class="row" *ngFor="let stock of user.soldHoldings">
+      <hr>
+      <div class="col-lg-2">
+        <p>{{stock.company}}</p>
+      </div>
+      <div class="col-lg-2">
+        <p>{{stock.sellPrice * stock.Qty | number:maxFractionDigits}}</p>
+      </div>
+      <div class="col-lg-2">
+        <p>{{stock.Qty}}</p>
+      </div>
+      <div class="col-lg-2">
+        <p>{{stock.dateIn | date:'shortDate'}}</p>
+      </div>
+      <div class="col-lg-2">
+        <p>{{stock.dateOut | date:'shortDate'}}</p>
+      </div>
+      <div class="col-lg-2">
+        <p>{{((stock.sellPrice * stock.Qty) - (stock.purchesPrice * stock.Qty)) | number:maxFractionDigits}}</p>
+      </div>
     </div>
   </div>
 </div>
